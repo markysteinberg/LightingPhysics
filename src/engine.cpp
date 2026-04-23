@@ -9,17 +9,24 @@
 
 Engine::Engine() 
     : shader("assets/shaders/default.vert", "assets/shaders/default.frag"),
-      object("assets/objects/sphere.obj") 
+      shape("assets/objects/cube.obj")
     {}
     
 void Engine::init() {
     renderer.init();
 
-    object.mesh.setup();
+    floorGrid.setup();
 
-    object.scale = {1.0f, 1.0f, 1.0f};
-    object.position = {0.0f, 0.0f, 0.0f};
-    object.rotation = {0.0f, 0.0f, 0.0f};
+    shape.mesh.setup();
+    shape.scale = {0.60f, 0.60f, 0.60f};
+    shape.position = {0.0f, 0.0f, 0.0f};
+    shape.rotation = {0.0f, 0.0f, 0.0f};
+}
+
+void Engine::update(float dt) {
+    if (shape.rotationMode) {
+        shape.rotation.y += 2.0f * dt;
+    }
 }
 
 int Engine::run(Window* window) {
@@ -29,9 +36,18 @@ int Engine::run(Window* window) {
         float dt = currentTime - lastTime;
         lastTime = currentTime; 
 
-        window->processInput(&object);
+        window->processInput(&shape);
 
-        renderer.render(object, shader, dt);
+        glm::mat4 view = camera.getView();
+        glm::mat4 projection = camera.getProjection();
+
+        update(dt);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        renderer.renderFloorGrid(floorGrid, view, projection);
+        renderer.renderObject(shape, shader, camera.position, view, projection);
 
         glfwSwapBuffers(window->get());
         glfwPollEvents();

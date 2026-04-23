@@ -11,34 +11,39 @@
 #include "renderer.h" 
 #include "object.h" 
 #include "config.h" 
+#include "camera.h" 
 
 void Renderer::init() {
     glEnable(GL_DEPTH_TEST);
 }
 
-void Renderer::render(Object& object, Shader& shader, float dt) {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+void Renderer::renderObject(Object& object, Shader& shader, const glm::vec3 cameraPos, const glm::mat4 view, const glm::mat4 projection) {
     shader.use();
-
-    glm::vec3 cameraPos = glm::vec3(1.5f, 1.5f, 1.5f);
-    glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f);
-    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-
-    glm::mat4 view = glm::lookAt(cameraPos, target, up);
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_WIDTH / WINDOW_HEIGHT, 0.1f, 100.0f);
-
-    if (object.rotationMode) {
-        object.rotation.y += 2.0f * dt;
-    }
 
     glm::mat4 model = object.getModel();
 
     glm::mat4 mvp = projection * view * model;
-    ;
+
     shader.setMat4("mvp", mvp); 
     shader.setVec3("lightPos", glm::vec3(1.0f, 1.0f, 2.0f)); 
     shader.setVec3("viewPos", cameraPos);
     object.draw(shader); 
+}
+
+void Renderer::renderFloorGrid(FloorGrid& grid, const glm::mat4 view, const glm::mat4 projection) {
+    glEnable(GL_BLEND);
+    glDepthMask(GL_FALSE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    glPolygonOffset(-1.0f, -1.0f);
+
+    grid.enableShader(view, projection);
+
+    glBindVertexArray(grid.getVAO());
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glDisable(GL_POLYGON_OFFSET_FILL);
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
 }

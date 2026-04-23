@@ -45,6 +45,8 @@ set(CPP_SOURCES
 	src/object.cpp
 	src/renderer.cpp
 	src/engine.cpp
+	src/floor_grid.cpp
+	src/camera.cpp
 )
 
 add_library(glad STATIC src/glad.c)

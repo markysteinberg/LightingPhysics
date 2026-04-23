@@ -10,6 +10,8 @@
 #include "window.h"
 #include "object.h"
 #include "shader.h" 
+#include "floor_grid.h"
+#include "camera.h"
 
 class Engine {
 public: 
@@ -17,9 +19,13 @@ public:
     void init();
     int run(Window* window);
 private:
+    void update(float dt);
+
     Shader shader;
     Renderer renderer;
-    Object object;
+    Camera camera;
+    FloorGrid floorGrid;    
+    Object shape;
 };
 
 #endif

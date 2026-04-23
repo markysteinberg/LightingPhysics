@@ -1,0 +1,4 @@
+/home/vm/Desktop/LightingPhysics/build/CMakeFiles/glad.dir
+/home/vm/Desktop/LightingPhysics/build/CMakeFiles/balltest.dir
+/home/vm/Desktop/LightingPhysics/build/CMakeFiles/edit_cache.dir
+/home/vm/Desktop/LightingPhysics/build/CMakeFiles/rebuild_cache.dir

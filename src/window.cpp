@@ -34,6 +34,8 @@ Window::Window(int w, int h, const char* title) {
     if (!window) {
         throw std::runtime_error("FAILED TO CREATE GLFLW WINDOW");
     }
+    const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor()); 
+    glfwSetWindowPos(window, (mode->width - w) / 2, (mode->height - h) / 2);
 
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
@@ -47,16 +49,6 @@ Window::~Window() {
 void Window::processInput(Object* object) {
     if (is_key_pressed_once(window, GLFW_KEY_Q)) {
         glfwSetWindowShouldClose(window, true);
-    }
-    if (is_key_pressed_once(window, GLFW_KEY_UP)) {
-        if (object->scale.x < 1.5f) {
-            object->scale += glm::vec3(0.1f);
-        }
-    }
-    if (is_key_pressed_once(window, GLFW_KEY_DOWN)) {
-        if (object->scale.x > 0.1f) {
-            object->scale -= glm::vec3(0.1f);
-        }
     }
     if (is_key_pressed_once(window, GLFW_KEY_RIGHT)) {
         if (!object->rotationMode)
