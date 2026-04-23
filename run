@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e 
+
+echo "RUNNING SCRIPT..."  
+cmake --build build
+./build/balltest

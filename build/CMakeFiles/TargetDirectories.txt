@@ -1,0 +1,4 @@
+/home/vm/Desktop/Balls/build/CMakeFiles/glad.dir
+/home/vm/Desktop/Balls/build/CMakeFiles/balltest.dir
+/home/vm/Desktop/Balls/build/CMakeFiles/edit_cache.dir
+/home/vm/Desktop/Balls/build/CMakeFiles/rebuild_cache.dir
