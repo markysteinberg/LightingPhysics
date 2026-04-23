@@ -1,0 +1,5 @@
+build/
+run
+run.ps1
+*.o
+*.o.d
