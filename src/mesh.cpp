@@ -48,9 +48,6 @@ Mesh::Mesh(const std::string& path) {
             }
         }     
     }
-    std::cout << "Vertices: " << vertices.size() << " Indices: " << indices.size() << '\n';
-    std::cout << "First vertex: " << vertices[0].position.x << " " << vertices[0].position.y << " " << vertices[0].position.z << '\n';
-    std::cout << "Last vertex: " << vertices.back().position.x << " " << vertices.back().position.y << " " << vertices.back().position.z << '\n';
 }
 
 Mesh::~Mesh() {
@@ -79,8 +76,6 @@ void Mesh::setup() {
     glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
-
-    std::cout << "VAO: " << VAO << " VBO: " << VBO << " EBO: " << EBO << '\n';
 }
 
 void Mesh::draw() const {

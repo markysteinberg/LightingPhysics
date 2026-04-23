@@ -36,13 +36,9 @@ void Renderer::render(Object& object, Shader& shader, float dt) {
     glm::mat4 model = object.getModel();
 
     glm::mat4 mvp = projection * view * model;
-    
-    std::cout << "shader ID: " << shader.getID() << '\n';
-    shader.setMat4("mvp", mvp); std::cout << "mvp: " << glGetError() << '\n';
-    shader.setVec3("lightPos", glm::vec3(1.0f, 1.0f, 2.0f)); std::cout << "lightPos: " << glGetError() << '\n';
-    shader.setVec3("viewPos", cameraPos); std::cout << "viewPos: " << glGetError() << '\n';
-    object.draw(shader); std::cout << "draw: " << glGetError() << '\n';   
-
-    GLenum err = glGetError();
-    if (err != GL_NO_ERROR) std::cout << "GL ERROR: " << err << '\n';
+    ;
+    shader.setMat4("mvp", mvp); 
+    shader.setVec3("lightPos", glm::vec3(1.0f, 1.0f, 2.0f)); 
+    shader.setVec3("viewPos", cameraPos);
+    object.draw(shader); 
 }

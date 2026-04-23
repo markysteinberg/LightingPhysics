@@ -16,7 +16,7 @@ void Engine::init() {
     renderer.init();
 
     object.mesh.setup();
-    std::cout << "setup done, VAO: " << object.mesh.VAO << '\n';
+
     object.scale = {1.0f, 1.0f, 1.0f};
     object.position = {0.0f, 0.0f, 0.0f};
     object.rotation = {0.0f, 0.0f, 0.0f};

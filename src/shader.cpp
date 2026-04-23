@@ -18,7 +18,6 @@ std::string readGLSL(const char* path) {
 Shader::Shader(const char* vspath, const char* fspath) {
     std::string vss = readGLSL(vspath);
     std::string fss = readGLSL(fspath);
-    std::cout << "VS length: " << vss.size() << " FS length: " << fss.size() << '\n';
 
     if (vss.empty() || fss.empty()) {
         throw std::runtime_error("GLSL SHADER FILE FAILED TO LOAD"); 
@@ -76,8 +75,6 @@ void Shader::check_link(GLuint program) {
 }
 
 void Shader::setMat4(const std::string& name, const glm::mat4& mat) const {
-    int loc = glGetUniformLocation(ID, name.c_str());
-    std::cout << name << " loc: " << loc << '\n';
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
