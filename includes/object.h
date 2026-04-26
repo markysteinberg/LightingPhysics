@@ -5,6 +5,7 @@
 
 #include "mesh.h" 
 #include "shader.h" 
+#include "rigidbody.h"
 
 #include <glm/vec3.hpp>
 #include <glm/glm.hpp> 
@@ -26,6 +27,9 @@ public:
     glm::mat4 getModel() const;
 
     void draw(const Shader& shader) const;
+
+    RigidBody rigidbody;
+    bool hasRigidBody = false; 
 private:
 
 };

@@ -25,7 +25,7 @@ void Renderer::renderObject(Object& object, Shader& shader, const glm::vec3 came
     glm::mat4 mvp = projection * view * model;
 
     shader.setMat4("mvp", mvp); 
-    shader.setVec3("lightPos", glm::vec3(1.0f, 1.0f, 2.0f)); 
+    shader.setVec3("lightPos", glm::vec3(1.0f, 4.0f, 2.0f)); 
     shader.setVec3("viewPos", cameraPos);
     object.draw(shader); 
 }
