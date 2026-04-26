@@ -18,6 +18,8 @@ public:
     Engine();
     void init();
     int run(Window* window);
+
+    void handleGameInput(GLFWwindow* window);
 private:
     void update(float dt);
 

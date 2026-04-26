@@ -5,20 +5,10 @@
 #include "glad/glad.h"
 
 #include "window.h"
+#include "util.h" 
 
 void frambuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
-}
-
-bool is_key_pressed_once(GLFWwindow* window, int key) {
-    static bool last[GLFW_KEY_LAST + 1] = { false };
-
-    bool now = glfwGetKey(window, key) == GLFW_PRESS; 
-
-    bool pressed = now && !last[key];
-    last[key] = now;
-
-    return pressed; 
 }
 
 Window::Window(int w, int h, const char* title) {
@@ -46,9 +36,12 @@ Window::~Window() {
     if (window) glfwDestroyWindow(window);
 }
 
-void Window::processInput(Object* object) {
+void Window::processInput(Object* object, FloorGrid* grid) {
     if (is_key_pressed_once(window, GLFW_KEY_Q)) {
         glfwSetWindowShouldClose(window, true);
+    }
+    if (is_key_pressed_once(window, GLFW_KEY_1)) {
+        grid->on = !grid->on;
     }
     if (is_key_pressed_once(window, GLFW_KEY_RIGHT)) {
         if (!object->rotationMode)
